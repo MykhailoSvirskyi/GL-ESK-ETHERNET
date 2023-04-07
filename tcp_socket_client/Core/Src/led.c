@@ -42,7 +42,7 @@ void comandreader(char *in, char *out) {
 
 	sscanf(in, "%s", cmd1);
 	if (strcmp(cmd1, "sversion") == 0) {
-		sprintf(out, "udp_svr_mykhailo_svirskyi_26032023\nOK\n");   // version
+		sprintf(out, "udp_srv_mykhailo_svirskyi_26032023\nOK");   // version
 	} else
 
 	{
@@ -51,7 +51,7 @@ void comandreader(char *in, char *out) {
 		if (strcmp(cmd, "led") == 0) {
 			num = atoi(cnum);
 			if (num > 2 && num < 7) {
-				sprintf(out, "OK\n"); //print "ok " but if wrong last command overwrite to error
+				sprintf(out, "OK\r\n"); //print "ok " but if wrong last command overwrite to error
 				if (strcmp(sts, "on") == 0) {
 					BSP_LED_On(led_num_converter(num));
 				} else if (strcmp(sts, "off") == 0) {
@@ -62,16 +62,16 @@ void comandreader(char *in, char *out) {
 
 				else if (strcmp(sts, "status") == 0) {
 					uint8_t n = BSP_LED_Read(led_num_converter(num));
-					sprintf(out, "LED%d %s\nOK\n", num, (n == 0 ? "OFF" : "ON"));
+					sprintf(out, "LED%d %s\r\n", num, (n == 0 ? "OFF" : "ON"));
 				} else {
-					sprintf(out, "ERROR\n");   //error
+					sprintf(out, "ERROR\r\n");   //error
 				}
 			} else {
-				sprintf(out, "ERROR\n");   //error
+				sprintf(out, "ERROR\r\n");   //error
 			}
 
 		} else {
-			sprintf(out, "ERROR\n");   //error
+			sprintf(out, "ERROR\r\n");   //error
 		}
 	}
 
